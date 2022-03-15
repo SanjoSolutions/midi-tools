@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@tonaljs/tonal": "^4.6.5",
+    "midi-writer-js": "^2.1.0"
+  }
+}
