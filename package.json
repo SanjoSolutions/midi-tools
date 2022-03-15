@@ -2,6 +2,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@sanjo/array": "^1.1.1",
     "@tonaljs/tonal": "^4.6.5",
     "midi-writer-js": "^2.1.0"
   }

@@ -1,6 +1,7 @@
 import fs from 'fs/promises'
 import MIDIWriter from 'midi-writer-js'
 import { Scale } from '@tonaljs/tonal'
+import { nOutOfWithDuplicates } from '@sanjo/array'
 
 const track = new MIDIWriter.Track()
 track.addEvent(new MIDIWriter.ProgramChangeEvent({ instrument: 1 }))
@@ -14,11 +15,13 @@ function addNote(tone) {
   track.addEvent(note)
 }
 
+const numberOfNotes = 2
+
 const scale = Scale.get('C major')
-for (const tone1 of scale.notes) {
-  for (const tone2 of scale.notes) {
-    addNote(tone1 + '4')
-    addNote(tone2 + '4')
+const toneSequences = nOutOfWithDuplicates(numberOfNotes, scale.notes)
+for (const toneSequence of toneSequences) {
+  for (const tone of toneSequence) {
+    addNote(tone + '4')
   }
 }
 
