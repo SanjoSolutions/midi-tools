@@ -44,18 +44,36 @@ const track = createTrack()
 
 let isFirstSequence = true
 
+function generateTriChord(root) {
+  return [
+    scale.notes[root - 1] + "4",
+    scale.notes[(root + 2 - 1) % 7] + "4",
+    scale.notes[(root + 4 - 1) % 7] + "4",
+  ]
+}
+
+function generate11thChord(root) {
+  return [
+    scale.notes[root - 1] + "4",
+    scale.notes[(root + 3 - 1) % 7] + "4",
+    scale.notes[(root + 4 - 1) % 7] + "4",
+    scale.notes[(root + 6 - 1) % 7] + "4",
+  ]
+}
+
 for (let length = 2; length <= 8; length++) {
   const sequences = nOutOfWithDuplicates(length)
 
   for (const sequence of sequences) {
     let isFirstNumber = true
     for (const number of sequence) {
-      const pitch = [
-        scale.notes[number - 1] + "4",
-        scale.notes[(number + 2 - 1) % 7] + "4",
-        scale.notes[(number + 4 - 1) % 7] + "4",
-      ]
-      addNoteEvent(track, pitch, "4", isFirstSequence || !isFirstNumber ? '0' : '4')
+      const pitch = generate11thChord(number)
+      addNoteEvent(
+        track,
+        pitch,
+        "4",
+        isFirstSequence || !isFirstNumber ? "0" : "4",
+      )
 
       isFirstNumber = false
     }
